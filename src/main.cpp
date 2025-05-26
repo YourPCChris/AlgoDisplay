@@ -36,6 +36,9 @@ int main()
         BeginDrawing();
         ClearBackground(BLACK);
 
+        if (g->getX() == g->getCol()-1 && g->getY() == g->getRow()) 
+            g->setAlgo(g->Algo::NONE);
+
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             Rectangle mouseRec= Rectangle{(float)GetMouseX(), (float)GetMouseY(), 20, 20};
             Vector2 mousePos = Vector2{(float)GetMouseX(), (float)GetMouseY()};
@@ -46,13 +49,33 @@ int main()
             }else if (CheckCollisionRecs(mouseRec, buttons[1]->getRec())){
                 g->resetPos();
             }else if (CheckCollisionRecs(mouseRec, buttons[2]->getRec())){
+                g->setAlgo(g->Algo::RANDOM);
                 std::cout << "Random Algo with two recs" << std::endl;
-                runRandom(g);
             }else if (CheckCollisionRecs(mouseRec, buttons[3]->getRec())){
                 std::cout << "Dijkstra's Algorithm" << std::endl;
             }
         }
 
+        switch (g->getAlgo())
+        {
+            case Grid::RANDOM: 
+                runRandom(g);
+                break;
+            case Grid::BF:
+                std::cout << "Breadth First Search" << std::endl;
+                break;
+            case Grid::DF:
+                std::cout << "Depth First Search" << std::endl;
+                break;
+            case Grid::DIJKSTRA:
+                std::cout << "Dijkra's Algorithm" << std::endl;
+                break;
+            case Grid::NONE:
+                break;
+            default:
+                std::cout << "Invalid Algorithm" << std::endl;
+                break;
+        }
         for (auto& button : buttons)
         {
             button->display();
