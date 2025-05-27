@@ -9,5 +9,6 @@ void GridSquare::draw(int x, int y)
 }
 
 void GridSquare::setColor(Color newColor) { color = newColor;}
+Color GridSquare::getColor() { return color;}
 
 

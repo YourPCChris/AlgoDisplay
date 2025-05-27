@@ -16,13 +16,8 @@ int getRandomNum()
 
 void runRandom(std::unique_ptr<Grid>& g)
 {
-    bool destFound = false;
-    std::cout << "Starting rand algo" << std::endl;
-
-    std::cout << "Searching" << std::endl;
+    //Get random direction and alter the x&y values to reflect that 
     int direction = getRandomNum();
-    //std::cout << "direction decided" << std::endl;
-    //std::cout << direction << std::endl;
 
     switch(direction)
     {
@@ -49,10 +44,4 @@ void runRandom(std::unique_ptr<Grid>& g)
         default:
             std::cout << "Not a direction" << std::endl;
     }
-
-    //Check if algo has reached bottom right 
-    if (g->getY() == g->getRow()-1 && g->getX() == g->getCol()-1){
-        destFound = true;
-    }
-    std::cout << "Searching OVER" << std::endl;
 }

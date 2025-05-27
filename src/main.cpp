@@ -3,6 +3,7 @@
 #include "grid.h"
 #include "Button.h"
 #include "random.h"
+#include "depthFirst.h"
 #include "raylib.h"
 
 
@@ -10,10 +11,13 @@ std::vector<std::unique_ptr<Button>> getButtons()
 {
     std::vector<std::unique_ptr<Button>> buttons;
 
-    buttons.push_back(std::make_unique<Button>("Clear Grid", 20, 20));
-    buttons.push_back(std::make_unique<Button>("Reset Position", 20, buttons[0]->getHeight()*2));
-    buttons.push_back(std::make_unique<Button>("Random", 20, buttons[0]->getHeight()*4));
-    buttons.push_back(std::make_unique<Button>("Dijkstra's", 20, buttons[0]->getHeight()*6));
+    buttons.push_back(std::make_unique<Button>("Clear Grid", 20, 10));
+    buttons.push_back(std::make_unique<Button>("Reset Position", 20, buttons[0]->getHeight()*1.2));
+    buttons.push_back(std::make_unique<Button>("Random", 20, buttons[0]->getHeight()*2.4));
+    buttons.push_back(std::make_unique<Button>("Dijkstra's", 20, buttons[0]->getHeight()*3.6));
+    buttons.push_back(std::make_unique<Button>("Depth First", 20, buttons[0]->getHeight()*4.8));
+    buttons.push_back(std::make_unique<Button>("Bredth First", 20, buttons[0]->getHeight()*6));
+    buttons.push_back(std::make_unique<Button>("Go To End", 20, buttons[0]->getHeight()*7.2));
 
     return buttons;
 }
@@ -36,8 +40,9 @@ int main()
         BeginDrawing();
         ClearBackground(BLACK);
 
-        if (g->getX() == g->getCol()-1 && g->getY() == g->getRow()) 
-            g->setAlgo(g->Algo::NONE);
+        if (g->getX() == g->getCol()-1 && g->getY() == g->getRow()-1) {
+            g->destFound();
+        }
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             Rectangle mouseRec= Rectangle{(float)GetMouseX(), (float)GetMouseY(), 20, 20};
@@ -50,9 +55,15 @@ int main()
                 g->resetPos();
             }else if (CheckCollisionRecs(mouseRec, buttons[2]->getRec())){
                 g->setAlgo(g->Algo::RANDOM);
-                std::cout << "Random Algo with two recs" << std::endl;
             }else if (CheckCollisionRecs(mouseRec, buttons[3]->getRec())){
                 std::cout << "Dijkstra's Algorithm" << std::endl;
+                g->setAlgo(g->Algo::DIJKSTRA);
+            }else if (CheckCollisionRecs(mouseRec, buttons[4]->getRec())){
+                g->setAlgo(g->Algo::DF);
+            }else if (CheckCollisionRecs(mouseRec, buttons[5]->getRec())){
+                g->setAlgo(g->Algo::BF);
+            }else if (CheckCollisionRecs(mouseRec, buttons[6]->getRec())){
+                g->goToDest();
             }
         }
 
@@ -66,6 +77,7 @@ int main()
                 break;
             case Grid::DF:
                 std::cout << "Depth First Search" << std::endl;
+                runDepthFirst(g);
                 break;
             case Grid::DIJKSTRA:
                 std::cout << "Dijkra's Algorithm" << std::endl;

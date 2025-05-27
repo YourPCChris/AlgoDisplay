@@ -12,4 +12,5 @@ class GridSquare
         void highlight();
         void draw(int x, int y);
         void setColor(Color newColor);
+        Color getColor();
 };
