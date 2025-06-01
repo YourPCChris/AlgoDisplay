@@ -116,7 +116,7 @@ void Grid::right()
     if (x+1 < col){
         //std::cout << "Moving Right Values are: " << x+1 << " : " << y << std::endl;
         highlightSquare(x+1, y, RED);
-        direction = 0;
+        direction = 3;
     }
 }
 void Grid::left()
@@ -124,7 +124,7 @@ void Grid::left()
     if (x-1 >= 0){
         //std::cout << "Moving Left Values are: " << x-1 << " : " << y << std::endl;
         highlightSquare(x-1, y, RED);
-        direction = 2;
+        direction = 1;
     }
 }
 void Grid::up()
@@ -132,7 +132,7 @@ void Grid::up()
     if (y-1 >= 0){
         //std::cout << "Moving UP Values are: " << x << " : " << y-1 << std::endl;
         highlightSquare(x, y-1, RED);
-        direction = 3;
+        direction = 2;
     }
 }
 void Grid::down()
@@ -140,7 +140,7 @@ void Grid::down()
     if (y+1 < row){
         //std::cout << "Moving DOWN Values are: " << x << " : " << y+1 << std::endl;
         highlightSquare(x, y+1, RED);
-        direction = 3;
+        direction = 0;
     }
 }
 

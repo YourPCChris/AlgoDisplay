@@ -26,7 +26,7 @@ void runDepthFirst(std::unique_ptr<Grid>& g)
     //Check for unvisited square (DARKGRAY) if it is inbounds go there if all options are exausted backtrack using stack
     //Right
     if (g->getX()+1 < g->getCol()){
-        if (g->getDirection() == 0 && !g->checkVisited(g->getX()+1, g->getY())){
+        if (g->getDirection() == 3 && !g->checkVisited(g->getX()+1, g->getY())){
             g->pushToStack();
             g->right();
             return;
@@ -35,7 +35,7 @@ void runDepthFirst(std::unique_ptr<Grid>& g)
 
     //Down
     if (g->getY()+1 < g->getRow()){
-        if (g->getDirection() == 3 && !g->checkVisited(g->getX(), g->getY()+1)){
+        if (g->getDirection() == 0 && !g->checkVisited(g->getX(), g->getY()+1)){
             g->pushToStack();
             g->down();
             return;
