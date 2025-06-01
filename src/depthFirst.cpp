@@ -24,36 +24,36 @@ void runDepthFirst(std::unique_ptr<Grid>& g)
 {
     //Direction Order {Right-Left-Up-Down}
     //Check for unvisited square (DARKGRAY) if it is inbounds go there if all options are exausted backtrack using stack
-    //Right
-    if (g->getX()+1 < g->getCol()){
-        if (g->getDirection() == 3 && !g->checkVisited(g->getX()+1, g->getY())){
-            g->pushToStack();
-            g->right();
-            return;
-        }
-    }
-
-    //Down
-    if (g->getY()+1 < g->getRow()){
-        if (g->getDirection() == 0 && !g->checkVisited(g->getX(), g->getY()+1)){
-            g->pushToStack();
-            g->down();
-            return;
-        }
-    }
-
     //Left
     if (g->getX()-1 >= 0){
-        if (g->getDirection() == 1 && g->getDirection() == 1 && !g->checkVisited(g->getX()-1, g->getY())){
+        if (g->getDirection() == 1 && !g->checkVisited(g->getX()-1, g->getY())){
             g->pushToStack();
             g->left();
             return;
         }
     }
 
+    //Down
+    if (g->getY()+1 < g->getRow()){
+        if (!g->checkVisited(g->getX(), g->getY()+1)){
+            g->pushToStack();
+            g->down();
+            return;
+        }
+    }
+    
+    //Right
+    if (g->getX()+1 < g->getCol()){
+        if (!g->checkVisited(g->getX()+1, g->getY())){
+            g->pushToStack();
+            g->right();
+            return;
+        }
+    }
+
     //Up
     if (g->getY()-1 >= 0){
-        if (g->getDirection() == 2 && !g->checkVisited(g->getX(), g->getY()-1)){
+        if (!g->checkVisited(g->getX(), g->getY()-1)){
             g->pushToStack();
             g->up();
             return;
