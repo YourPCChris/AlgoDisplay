@@ -10,6 +10,8 @@ Grid::Grid(unsigned short numRow, unsigned short numCol, int newSquareSize)
     grid[y][x]->setColor(RED);
     runningAlgo = Algo::NONE;
     direction = 0;
+    std::pair<int,int> start = std::make_pair<int,int>(0,0);
+    queue.push(start);
 }
 
 void Grid::makeGrid()
@@ -62,54 +64,6 @@ void Grid::highlightSquare(int newX, int newY, Color newColor)
         std::cout << "Invalid move to: (" << newX << ", " << newY << ")" << std::endl;
     }
 }
-/*
-void Grid::highlightSquare(int newX, int newY, Color newColor)
-{
-    //Highlight current square RED
-    if (newY >= 0 && newY < row && newX >=0 && newX < col){
-        std::cout << "Colouring in Square at : " << x << " : " << y << std::endl;
-        grid[newY][newX]->setColor(RED);
-
-        //Highlight previous square DARKBLUE
-        grid[y][x]->setColor(newColor);
-    }
-}
-
-void Grid::highlightSquare(int direction)
-{ 
-    //Highlight current square RED
-    if (y >= 0 && y < row && x >=0 && x < col){
-        std::cout << "Colouring in Square at : " << x << " : " << y << std::endl;
-        grid[y][x]->setColor(RED);
-
-        //Highlight previous square DARKBLUE
-        if (0 <= direction <= 4){
-            switch (direction)
-            {
-                case 0:
-                    //Right
-                    grid[y][x-1]->setColor(DARKBLUE);
-                    break;
-                case 1:
-                    //Left
-                    grid[y][x+1]->setColor(DARKBLUE);
-                    break;
-                case 2: //Up
-                    grid[y+1][x]->setColor(DARKBLUE);
-                    break;
-                case 3:
-                    //Down
-                    grid[y-1][x]->setColor(DARKBLUE);
-                    break;
-                default:
-                    std::cout << "Invalid direction given, previous square not coloured" << std::endl;
-            }
-        return;
-        }
-    }
-    std::cout << " Failed to set Color -------------_" << std::endl;
-}
-*/
 
 void Grid::right()
 {
@@ -194,6 +148,29 @@ void Grid::popFromStack()
     if (!pathStack.empty())
         pathStack.pop();
 }
+
+void Grid::pushToQueue(int x, int y)
+{
+    if (0 <= x && x < col &&
+            0 <= y && y < row){
+        int newX = x; int newY = y;
+        std::pair<int,int> newPos = std::make_pair(x,y);
+        queue.push(newPos);
+    }
+}
+
+std::pair<int,int> Grid::popFromQueue()
+{
+    return queue.front();
+}
+
+std::pair<int,int> Grid::getFront()
+{
+    std::pair<int,int> front = queue.front();
+    return front;
+}
+bool Grid::queueEmpty() { return queue.empty();}
+
 void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
 void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
 std::pair<unsigned short, unsigned short> Grid::peepStack() {return pathStack.top();}

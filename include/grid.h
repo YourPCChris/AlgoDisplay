@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <stack>
+#include <queue>
 #include "gridSquare.h"
 
 
@@ -48,6 +49,11 @@ class Grid
         bool checkVisited(unsigned short x, unsigned short y);
         bool checkEmpty();
         void goToDest();
+        bool queueEmpty();
+        void pushToQueue(int x, int y);
+        std::pair<int,int> getFront();
+        std::pair<int,int> popFromQueue();
+
         
 
     private:
@@ -60,5 +66,6 @@ class Grid
         int direction;
         Algo runningAlgo;
         std::stack<std::pair<unsigned short, unsigned short>> pathStack;
+        std::queue<std::pair<int,int>> queue;
 };
 

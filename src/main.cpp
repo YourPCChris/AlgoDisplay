@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "random.h"
 #include "depthFirst.h"
+#include "breadthFirst.h"
 #include "raylib.h"
 
 
@@ -73,10 +74,9 @@ int main()
                 runRandom(g);
                 break;
             case Grid::BF:
-                std::cout << "Breadth First Search" << std::endl;
+                runBreadthFirst(g);
                 break;
             case Grid::DF:
-                std::cout << "Depth First Search" << std::endl;
                 runDepthFirst(g);
                 break;
             case Grid::DIJKSTRA:
