@@ -34,6 +34,7 @@ class Grid
         int getY();
         int getRow();
         int getCol();
+        int getDirection();
         Algo getAlgo();
         void setX(int newX);
         void setY(int newY);
@@ -56,6 +57,7 @@ class Grid
         unsigned short  x;
         unsigned short y;
         int squareSize;
+        int direction;
         Algo runningAlgo;
         std::stack<std::pair<unsigned short, unsigned short>> pathStack;
 };

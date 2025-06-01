@@ -9,6 +9,7 @@ Grid::Grid(unsigned short numRow, unsigned short numCol, int newSquareSize)
     makeGrid();
     grid[y][x]->setColor(RED);
     runningAlgo = Algo::NONE;
+    direction = 0;
 }
 
 void Grid::makeGrid()
@@ -115,6 +116,7 @@ void Grid::right()
     if (x+1 < col){
         //std::cout << "Moving Right Values are: " << x+1 << " : " << y << std::endl;
         highlightSquare(x+1, y, RED);
+        direction = 0;
     }
 }
 void Grid::left()
@@ -122,6 +124,7 @@ void Grid::left()
     if (x-1 >= 0){
         //std::cout << "Moving Left Values are: " << x-1 << " : " << y << std::endl;
         highlightSquare(x-1, y, RED);
+        direction = 2;
     }
 }
 void Grid::up()
@@ -129,6 +132,7 @@ void Grid::up()
     if (y-1 >= 0){
         //std::cout << "Moving UP Values are: " << x << " : " << y-1 << std::endl;
         highlightSquare(x, y-1, RED);
+        direction = 3;
     }
 }
 void Grid::down()
@@ -136,6 +140,7 @@ void Grid::down()
     if (y+1 < row){
         //std::cout << "Moving DOWN Values are: " << x << " : " << y+1 << std::endl;
         highlightSquare(x, y+1, RED);
+        direction = 3;
     }
 }
 
@@ -198,6 +203,7 @@ int Grid::getX() { return x;}
 int Grid::getY() { return y;}
 int Grid::getRow() { return row;}
 int Grid::getCol() { return col;}
+int Grid::getDirection() { return direction;}
 void Grid::setX(int newX) { x = newX;}
 void Grid::setY(int newY) { y = newY;}
 Grid::Algo Grid::getAlgo() { return runningAlgo;}
