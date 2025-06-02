@@ -6,7 +6,7 @@
 
 void backTrack(std::unique_ptr<Grid>& g)
 {
-    if (g->checkEmpty()){
+    if (g->checkStackEmpty()){
         g->setAlgo(Grid::Algo::NONE);
         std::cout << "Stack Empty" << std::endl;
         return;

@@ -117,6 +117,8 @@ void Grid::destFound()
     if (dColor.r == RED.r && dColor.g == RED.g 
             && dColor.b == RED.b && dColor.a == RED.a){
         dest->setColor(RED);
+        if (!queue.empty()){ emptyQueue();}
+        if (!pathStack.empty()){ emptyStack();}
         runningAlgo = Grid::NONE;
     }
 }
@@ -159,9 +161,9 @@ void Grid::pushToQueue(int x, int y)
     }
 }
 
-std::pair<int,int> Grid::popFromQueue()
+void Grid::popFromQueue()
 {
-    return queue.front();
+    queue.pop();
 }
 
 std::pair<int,int> Grid::getFront()
@@ -170,12 +172,19 @@ std::pair<int,int> Grid::getFront()
     return front;
 }
 bool Grid::queueEmpty() { return queue.empty();}
+void Grid::emptyQueue() 
+{
+    while (!queue.empty()) { queue.pop();}
+    std::pair<int, int> startPos = std::make_pair(0,0);
+    queue.push(startPos);
+}
+void Grid::emptyStack() { while (!pathStack.empty()) { pathStack.pop();}}
 
 void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
 void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
 std::pair<unsigned short, unsigned short> Grid::peepStack() {return pathStack.top();}
 
-bool Grid::checkEmpty() { return pathStack.empty();}
+bool Grid::checkStackEmpty() { return pathStack.empty();}
 int Grid::getX() { return x;}
 int Grid::getY() { return y;}
 int Grid::getRow() { return row;}

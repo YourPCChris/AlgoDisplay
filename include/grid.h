@@ -43,17 +43,20 @@ class Grid
         void clearGrid();
         void setAlgo(Algo newAlgo);
         void destFound();
-        void pushToStack();
-        std::pair<unsigned short, unsigned short> peepStack();
-        void popFromStack();
         bool checkVisited(unsigned short x, unsigned short y);
-        bool checkEmpty();
         void goToDest();
+        //-------------------Stack------------------------------
+        bool checkStackEmpty();
+        void popFromStack();
+        std::pair<unsigned short, unsigned short> peepStack();
+        void pushToStack();
+        void emptyStack();
+        //-------------------Queue------------------------------
         bool queueEmpty();
         void pushToQueue(int x, int y);
         std::pair<int,int> getFront();
-        std::pair<int,int> popFromQueue();
-
+        void popFromQueue();
+        void emptyQueue();
         
 
     private:

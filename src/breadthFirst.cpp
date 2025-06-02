@@ -1,10 +1,12 @@
 #include "breadthFirst.h"
 #include <memory>
 
+
 void addNodes(std::unique_ptr<Grid>& g)
 {
     if (g->queueEmpty()){
         g->setAlgo(Grid::Algo::NONE);
+        g->emptyQueue();
         std::cout << "Queue Empty Breadth First Done" << std::endl;
         return;
     }
@@ -46,14 +48,17 @@ void addNodes(std::unique_ptr<Grid>& g)
 void runBreadthFirst(std::unique_ptr<Grid>& g)
 {
     //Check if at Destination
-    if (g->getX() == g->getCol() &&
-            g->getY() == g->getRow()){
+    if (g->getX() == g->getCol() - 1 &&
+            g->getY() == g->getRow() - 1){
         g->setAlgo(Grid::Algo::NONE);
+        g->emptyQueue();
+        std::cout << "Destination Found" << std::endl;
         return;
     }
 
     //Add Nodes to queue to be visited 
     addNodes(g);
+
     g->popFromQueue();
     std::pair<int,int> newPos = g->getFront();
     g->highlightSquare(g->getX(), g->getY(), DARKBLUE);
