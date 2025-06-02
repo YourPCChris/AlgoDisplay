@@ -9,34 +9,49 @@ void addNodes(std::unique_ptr<Grid>& g)
         return;
     }
 
+    int x = g->getX();
+    int y = g->getY();
+
+
     //Check and add right node 
-    if (g->getX() + 1 < g->getCol()){
-        if (!g->checkVisited(g->getX()+1, g->getY())){
-            g->pushToQueue(g->getX() + 1, g->getY());
+    if (x + 1 < g->getCol()){
+        if (!g->checkVisited(x+1, y)){
+            g->pushToQueue(x + 1, y);
+            g->highlightSquare(x+1, y, DARKBLUE);
         }
     }
     //Check and add left node
-    if (g->getX() - 1 >= g->getCol()){
-        if (!g->checkVisited(g->getX() - 1, g->getY())){
-            g->pushToQueue(g->getX()-1, g->getY());
+    if (x - 1 >= 0){
+        if (!g->checkVisited(x - 1, y)){
+            g->pushToQueue(x-1, g->getY());
+            g->highlightSquare(x-1, y, DARKBLUE);
         }
     }
     //Check and add bottom node 
-    if (g->getY() + 1 < g->getRow()){
-        if (!g->checkVisited(g->getX(), g->getY() + 1)){
-            g->pushToQueue(g->getX(), g->getY() + 1);
+    if (y+1 < g->getRow()){
+        if (!g->checkVisited(x, y + 1)){
+            g->pushToQueue(x, y + 1);
+            g->highlightSquare(x, y+1, DARKBLUE);
         }
     }
     //Check and add top node 
-    if (g->getY() - 1 >= g->getRow()){
-        if (!g->checkVisited(g->getX(), g->getY() - 1)){
-            g->pushToQueue(g->getX(), g->getY() - 1);
+    if (y - 1 >= 0){
+        if (!g->checkVisited(x, y - 1)){
+            g->pushToQueue(x, y - 1);
+            g->highlightSquare(x, y-1, DARKBLUE);
         }
     }
 }
 
 void runBreadthFirst(std::unique_ptr<Grid>& g)
 {
+    //Check if at Destination
+    if (g->getX() == g->getCol() &&
+            g->getY() == g->getRow()){
+        g->setAlgo(Grid::Algo::NONE);
+        return;
+    }
+
     //Add Nodes to queue to be visited 
     addNodes(g);
     g->popFromQueue();
