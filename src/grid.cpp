@@ -21,7 +21,6 @@ void Grid::makeGrid()
         for (int j=0; j < col ;j++)
         {
             grid[i][j] = std::make_unique<GridSquare>(squareSize);
-            //grid.push_back(std::make_unique<GridSquare>(squareSize));
         }
     }
 }
@@ -59,7 +58,7 @@ void Grid::highlightSquare(int newX, int newY, Color newColor)
         x = newX;
         y = newY;
         grid[y][x]->setColor(newColor); // Typically RED
-        std::cout << "Moved to: (" << x << ", " << y << ")" << std::endl;
+        //std::cout << "Moved to: (" << x << ", " << y << ")" << std::endl;
     } else {
         std::cout << "Invalid move to: (" << newX << ", " << newY << ")" << std::endl;
     }
@@ -137,8 +136,54 @@ bool Grid::checkVisited(unsigned short x, unsigned short y)
 
     return isDarkGreen || isDarkBlue;
 }
-        
 
+void Grid::resetAlgos()
+{
+	emptyStack();
+	emptyQueue();
+	if (!queue.empty()){
+		if (queue.front() == std::make_pair(0,0)){
+			emptyQueue();
+		}
+	}
+
+	if (!pathStack.empty()){
+		emptyStack();
+	}
+
+	/*
+	std::queue<std::pair<int,int>> tempQ = queue;
+	std::stack<std::pair<int,int>> tempS = pathStack;
+	//Ouput Queue contents
+	std::cout << "Queue: " << std::endl;
+	while(!tempQ.empty()) 
+	{
+		std::cout<<tempQ.front().first<<":"<<tempQ.front().second<< std::endl;
+		tempQ.pop();
+	}
+	//Output Stack contents
+	std::cout << "Stack: " << std::endl;
+	while(!tempS.empty())
+	{
+		std::cout<<tempS.top().first<<":"<<tempS.top().second<<std::endl;
+		tempS.pop();
+	}
+	*/
+}
+
+void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
+void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
+int Grid::getX() { return x;}
+int Grid::getY() { return y;}
+int Grid::getRow() { return row;}
+int Grid::getCol() { return col;}
+int Grid::getDirection() { return direction;}
+void Grid::setX(int newX) { x = newX;}
+void Grid::setY(int newY) { y = newY;}
+Grid::Algo Grid::getAlgo() { return runningAlgo;}
+void Grid::goToDest() { x = col-1; y = row-1; destFound();}      
+
+//---------------------Stack-------------------------
 void Grid::pushToStack() 
 { 
     std::pair<unsigned short, unsigned short> posToPush = std::make_pair(x,y);
@@ -151,6 +196,11 @@ void Grid::popFromStack()
         pathStack.pop();
 }
 
+void Grid::emptyStack() { while (!pathStack.empty()) { pathStack.pop();}}
+std::pair<unsigned short, unsigned short> Grid::peepStack() {return pathStack.top();}
+bool Grid::checkStackEmpty() { return pathStack.empty();}
+
+//---------------------Queue--------------------------
 void Grid::pushToQueue(int x, int y)
 {
     if (0 <= x && x < col &&
@@ -178,19 +228,3 @@ void Grid::emptyQueue()
     std::pair<int, int> startPos = std::make_pair(0,0);
     queue.push(startPos);
 }
-void Grid::emptyStack() { while (!pathStack.empty()) { pathStack.pop();}}
-
-void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
-void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
-std::pair<unsigned short, unsigned short> Grid::peepStack() {return pathStack.top();}
-
-bool Grid::checkStackEmpty() { return pathStack.empty();}
-int Grid::getX() { return x;}
-int Grid::getY() { return y;}
-int Grid::getRow() { return row;}
-int Grid::getCol() { return col;}
-int Grid::getDirection() { return direction;}
-void Grid::setX(int newX) { x = newX;}
-void Grid::setY(int newY) { y = newY;}
-Grid::Algo Grid::getAlgo() { return runningAlgo;}
-void Grid::goToDest() { x = col-1; y = row-1; destFound();}

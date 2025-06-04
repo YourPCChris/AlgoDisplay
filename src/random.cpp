@@ -24,21 +24,21 @@ void runRandom(std::unique_ptr<Grid>& g)
         case 1:
             if (!(g->getX() + 1 == g->getCol())){
                 g->right();
-                std::cout << "RIGHT" << std::endl;
+                //std::cout << "RIGHT" << std::endl;
             }
             break;
         case 2:
             g->left();
-            std::cout << "LEFT" << std::endl;
+            //std::cout << "LEFT" << std::endl;
             break;
         case 3:
             g->up();
-            std::cout << "UP" << std::endl;
+            //std::cout << "UP" << std::endl;
             break;
         case 4:
             if (!(g->getY() + 1 == g->getRow())){
                 g->down();
-                std::cout << "DOWN" << std::endl;
+                //std::cout << "DOWN" << std::endl;
             }
             break;
         default:
