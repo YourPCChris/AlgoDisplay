@@ -18,7 +18,7 @@ std::vector<std::unique_ptr<Button>> getButtons()
     buttons.push_back(std::make_unique<Button>("Random", 25, buttons[0]->getHeight()*3.9));
     buttons.push_back(std::make_unique<Button>("Dijkstra's", 25, buttons[0]->getHeight()*5.1));
     buttons.push_back(std::make_unique<Button>("Depth First", 25, buttons[0]->getHeight()*6.3));
-    buttons.push_back(std::make_unique<Button>("Bredth First", 25, buttons[0]->getHeight()*7.5));
+    buttons.push_back(std::make_unique<Button>("Breadth First", 25, buttons[0]->getHeight()*7.5));
     buttons.push_back(std::make_unique<Button>("Go To End", 25, buttons[0]->getHeight()*8.7));
     return buttons;
 }
