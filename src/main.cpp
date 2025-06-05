@@ -13,8 +13,8 @@ std::vector<std::unique_ptr<Button>> getButtons()
     std::vector<std::unique_ptr<Button>> buttons;
 
     buttons.push_back(std::make_unique<Button>("Clear Grid", 25, 20));
-    buttons.push_back(std::make_unique<Button>("Reset Algorithms", 25, buttons[0]->getHeight()*1.5));
     buttons.push_back(std::make_unique<Button>("Reset Position", 25, buttons[0]->getHeight()*2.7));
+    buttons.push_back(std::make_unique<Button>("Reset Algorithms", 25, buttons[0]->getHeight()*1.5));
     buttons.push_back(std::make_unique<Button>("Random", 25, buttons[0]->getHeight()*3.9));
     buttons.push_back(std::make_unique<Button>("Dijkstra's", 25, buttons[0]->getHeight()*5.1));
     buttons.push_back(std::make_unique<Button>("Depth First", 25, buttons[0]->getHeight()*6.3));

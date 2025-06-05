@@ -186,7 +186,7 @@ void Grid::goToDest() { x = col-1; y = row-1; destFound();}
 //---------------------Stack-------------------------
 void Grid::pushToStack() 
 { 
-    std::pair<unsigned short, unsigned short> posToPush = std::make_pair(x,y);
+    std::pair<int, int> posToPush = std::make_pair(x,y);
     pathStack.push(posToPush);
 }
 
@@ -197,7 +197,7 @@ void Grid::popFromStack()
 }
 
 void Grid::emptyStack() { while (!pathStack.empty()) { pathStack.pop();}}
-std::pair<unsigned short, unsigned short> Grid::peepStack() {return pathStack.top();}
+std::pair<int, int> Grid::peepStack() {return (!pathStack.empty()) ? pathStack.top() : std::make_pair(-1,-1);}
 bool Grid::checkStackEmpty() { return pathStack.empty();}
 
 //---------------------Queue--------------------------
@@ -213,13 +213,13 @@ void Grid::pushToQueue(int x, int y)
 
 void Grid::popFromQueue()
 {
-    queue.pop();
+    if (!queue.empty()) queue.pop();
 }
 
 std::pair<int,int> Grid::getFront()
 {
     std::pair<int,int> front = queue.front();
-    return front;
+    return (!queue.empty()) ? front : std::make_pair(-1,-1);
 }
 bool Grid::queueEmpty() { return queue.empty();}
 void Grid::emptyQueue() 

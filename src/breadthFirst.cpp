@@ -61,6 +61,7 @@ void runBreadthFirst(std::unique_ptr<Grid>& g)
 
     g->popFromQueue();
     std::pair<int,int> newPos = g->getFront();
+    if (newPos == std::make_pair(-1,-1)) return;
     g->highlightSquare(g->getX(), g->getY(), DARKBLUE);
     g->setX(newPos.first);
     g->setY(newPos.second);

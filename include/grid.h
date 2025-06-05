@@ -49,7 +49,7 @@ class Grid
         //-------------------Stack------------------------------
         bool checkStackEmpty();
         void popFromStack();
-        std::pair<unsigned short, unsigned short> peepStack();
+        std::pair<int,int> peepStack();
         void pushToStack();
         void emptyStack();
         //-------------------Queue------------------------------
