@@ -218,8 +218,8 @@ void Grid::popFromQueue()
 
 std::pair<int,int> Grid::getFront()
 {
-    std::pair<int,int> front = queue.front();
-    return (!queue.empty()) ? front : std::make_pair(-1,-1);
+    std::pair<int,int> front = (!queue.empty()) ? queue.front() : std::make_pair(-1,-1);
+    return front;
 }
 bool Grid::queueEmpty() { return queue.empty();}
 void Grid::emptyQueue() 
