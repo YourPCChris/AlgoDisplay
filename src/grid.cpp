@@ -26,6 +26,9 @@ void Grid::makeGrid()
     }
 }
 
+void Grid::makeMaze()
+{}
+
 void Grid::display()
 {
     int startX = 200;

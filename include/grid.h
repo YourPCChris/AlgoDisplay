@@ -23,6 +23,7 @@ class Grid
 
         Grid(unsigned short numRow, unsigned short numCol, int newSquareSize=20);
         void makeGrid();
+        void makeMaze();
         void drawGrid();
         void display();
         void highlightSquare(int direction);
