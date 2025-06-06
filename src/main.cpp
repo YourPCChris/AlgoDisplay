@@ -93,10 +93,13 @@ int main()
                 std::cout << "Invalid Algorithm" << std::endl;
                 break;
         }
+        //Draw Buttons
         for (auto& button : buttons)
         {
             button->display();
         }
+        //Draw Error Label
+        DrawText(g->getErrorText(), 25, GetScreenHeight()-20, 20, RED);
         g->display();
         EndDrawing();
     }

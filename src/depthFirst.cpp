@@ -9,6 +9,8 @@ void backTrack(std::unique_ptr<Grid>& g)
     if (g->checkStackEmpty()){
         g->setAlgo(Grid::Algo::NONE);
         std::cout << "Stack Empty" << std::endl;
+        const char* error = "Stack Empty";
+        g->setErrorText(error);
         return;
     }
 

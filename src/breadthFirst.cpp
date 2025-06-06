@@ -8,6 +8,8 @@ void addNodes(std::unique_ptr<Grid>& g)
         g->setAlgo(Grid::Algo::NONE);
         g->emptyQueue();
         std::cout << "Queue Empty Breadth First Done" << std::endl;
+        const char* error = "Queue Empty Breadth First Done";
+        g->setErrorText(error);
         return;
     }
 
@@ -53,6 +55,8 @@ void runBreadthFirst(std::unique_ptr<Grid>& g)
         g->setAlgo(Grid::Algo::NONE);
         g->emptyQueue();
         std::cout << "Destination Found" << std::endl;
+        const char* error = "Destination Found";
+        g->setErrorText(error);
         return;
     }
 

@@ -1,5 +1,6 @@
 #include "grid.h"
 #include "gridSquare.h"
+#include <cstring>
 
 
 //--------------------Grid______________________________
@@ -12,6 +13,7 @@ Grid::Grid(unsigned short numRow, unsigned short numCol, int newSquareSize)
     direction = 0;
     std::pair<int,int> start = std::make_pair<int,int>(0,0);
     queue.push(start);
+    errorText = "";
 }
 
 void Grid::makeGrid()
@@ -46,6 +48,7 @@ void Grid::display()
     }
 } 
 
+const char* Grid::getErrorText() { return errorText;}
 void Grid::highlightSquare(int newX, int newY, Color newColor)
 {
     if (newX >= 0 && newX < col && newY >= 0 && newY < row) {
@@ -63,6 +66,8 @@ void Grid::highlightSquare(int newX, int newY, Color newColor)
         grid[y][x]->setColor(newColor); // Typically RED
         //std::cout << "Moved to: (" << x << ", " << y << ")" << std::endl;
     } else {
+        static std::string stringError = "Invalid Move -> " + std::to_string(newX) + ":" + std::to_string(newY);
+        setErrorText(stringError.c_str());
         std::cout << "Invalid move to: (" << newX << ", " << newY << ")" << std::endl;
     }
 }
@@ -174,6 +179,7 @@ void Grid::resetAlgos()
 	*/
 }
 
+void Grid::setErrorText(const char* newError) { errorText = newError;}
 void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
 void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
 int Grid::getX() { return x;}

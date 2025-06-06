@@ -32,12 +32,14 @@ class Grid
         void left();
         void up();
         void down();
+        const char* getErrorText();
         int getX();
         int getY();
         int getRow();
         int getCol();
         int getDirection();
         Algo getAlgo();
+        void setErrorText(const char* newError);
         void setX(int newX);
         void setY(int newY);
         void resetPos();
@@ -67,6 +69,7 @@ class Grid
         unsigned short col;
         unsigned short  x;
         unsigned short y;
+        const char* errorText;
         int squareSize;
         int direction;
         Algo runningAlgo;
