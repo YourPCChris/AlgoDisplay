@@ -17,7 +17,7 @@ class Button
     const char* text;
 
     public:
-    Button(const char* newText, float newX, float newY, float newWidth=160, float newHeight=80);
+    Button(const char* newText, float newX, float newY, float newWidth=160, float newHeight=60);
     void display();
     float getHeight();
     Rectangle getRec();

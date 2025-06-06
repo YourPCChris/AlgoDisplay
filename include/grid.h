@@ -46,10 +46,11 @@ class Grid
         void destFound();
         bool checkVisited(unsigned short x, unsigned short y);
         void goToDest();
+	void resetAlgos();
         //-------------------Stack------------------------------
         bool checkStackEmpty();
         void popFromStack();
-        std::pair<unsigned short, unsigned short> peepStack();
+        std::pair<int,int> peepStack();
         void pushToStack();
         void emptyStack();
         //-------------------Queue------------------------------
@@ -69,7 +70,7 @@ class Grid
         int squareSize;
         int direction;
         Algo runningAlgo;
-        std::stack<std::pair<unsigned short, unsigned short>> pathStack;
+        std::stack<std::pair<int,int>> pathStack;
         std::queue<std::pair<int,int>> queue;
 };
 

@@ -57,7 +57,7 @@ void runRandom(std::unique_ptr<Grid>& g)
                 g->pushToStack();
                 g->up();
             }
-            //std::cout << "UP" << std::endl;
+            //std::cout << "LEFT" << std::endl;
             break;
         case 4:
             if (!(g->getY() + 1 == g->getRow())){

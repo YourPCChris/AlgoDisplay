@@ -12,7 +12,8 @@ void backTrack(std::unique_ptr<Grid>& g)
         return;
     }
 
-    std::pair<unsigned short, unsigned short> newPos = g->peepStack();
+    std::pair<int,int> newPos = g->peepStack();
+    if (newPos == std::make_pair(-1,-1)) return;
     g->highlightSquare(g->getX(), g->getY(), DARKGREEN);
     g->setX(newPos.first);
     g->setY(newPos.second);
