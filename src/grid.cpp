@@ -1,6 +1,7 @@
 #include "grid.h"
 #include "gridSquare.h"
 #include <cstring>
+#include <random>
 
 
 //--------------------Grid______________________________
@@ -49,6 +50,13 @@ void Grid::display()
 } 
 
 const char* Grid::getErrorText() { return errorText;}
+void Grid::highlightSingleSquare(int newX, int newY, Color newColor)
+{
+    if (newX >= 0 && newX < col && newY >= 0 && newY < row) {
+        grid[newY][newX]->setColor(newColor);
+    }
+}
+
 void Grid::highlightSquare(int newX, int newY, Color newColor)
 {
     if (newX >= 0 && newX < col && newY >= 0 && newY < row) {
@@ -56,19 +64,20 @@ void Grid::highlightSquare(int newX, int newY, Color newColor)
         if (x >= 0 && x < col && y >= 0 && y < row) {
             Color currentColor = grid[y][x]->getColor();
             if (!(currentColor.r == DARKGREEN.r && currentColor.g == DARKGREEN.g &&
-                  currentColor.b == DARKGREEN.b && currentColor.a == DARKGREEN.a)) {
+                  currentColor.b == DARKGREEN.b && currentColor.a == DARKGREEN.a) &&
+                    !(currentColor.r == ORANGE.r && currentColor.g == ORANGE.g &&
+                        currentColor.b == ORANGE.b && currentColor.a == ORANGE.a)) {
                 grid[y][x]->setColor(DARKBLUE);
             }
         }
-        // Update position and set new square to RED
+        // Update position and set new square to newColor
         x = newX;
         y = newY;
-        grid[y][x]->setColor(newColor); // Typically RED
-        //std::cout << "Moved to: (" << x << ", " << y << ")" << std::endl;
+        grid[y][x]->setColor(newColor); 
     } else {
         static std::string stringError = "Invalid Move -> " + std::to_string(newX) + ":" + std::to_string(newY);
         setErrorText(stringError.c_str());
-        std::cout << "Invalid move to: (" << newX << ", " << newY << ")" << std::endl;
+        //std::cout << "Invalid move to: (" << newX << ", " << newY << ")" << std::endl;
     }
 }
 
@@ -137,12 +146,16 @@ bool Grid::checkVisited(unsigned short x, unsigned short y)
     Color squareColor = grid[y][x]->getColor();
 
     bool isDarkBlue = squareColor.r == DARKBLUE.r && squareColor.g == DARKBLUE.g
-            && squareColor.b == DARKBLUE.b && squareColor.a == DARKBLUE.a;
+        && squareColor.b == DARKBLUE.b && squareColor.a == DARKBLUE.a;
 
     bool isDarkGreen = squareColor.r == DARKGREEN.r && squareColor.g == DARKGREEN.g
-            && squareColor.b == DARKGREEN.b && squareColor.a == DARKGREEN.a;
+        && squareColor.b == DARKGREEN.b && squareColor.a == DARKGREEN.a;
 
-    return isDarkGreen || isDarkBlue;
+    bool isOrange = squareColor.r == ORANGE.r && squareColor.g == ORANGE.g 
+        && squareColor.b == ORANGE.b && squareColor.a == ORANGE.a;
+
+
+    return isDarkGreen || isDarkBlue || isOrange;
 }
 
 void Grid::resetAlgos()
@@ -177,6 +190,22 @@ void Grid::resetAlgos()
 		tempS.pop();
 	}
 	*/
+}
+
+void Grid::addObsticals()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist_x(1,79);
+    std::uniform_int_distribution<> dist_y(1,59);
+
+    for (int i=0; i<100 ;i++)
+    {
+        int obstX = dist_x(gen);
+        int obstY = dist_y(gen);
+        highlightSingleSquare(obstX, obstY, ORANGE);
+    }
+    //std::cout << "Obstical (X:Y) -> " << obstX << ":" << obstY << std::endl;
 }
 
 void Grid::setErrorText(const char* newError) { errorText = newError;}

@@ -26,8 +26,9 @@ class Grid
         void makeMaze();
         void drawGrid();
         void display();
-        void highlightSquare(int direction);
         void highlightSquare(int x, int y, Color newColor);
+        void highlightSingleSquare(int x, int y, Color newColor);
+        void addObsticals();
         void right();
         void left();
         void up();

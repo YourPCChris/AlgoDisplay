@@ -15,11 +15,12 @@ std::vector<std::unique_ptr<Button>> getButtons()
     buttons.push_back(std::make_unique<Button>("Clear Grid", 25, 20));
     buttons.push_back(std::make_unique<Button>("Reset Position", 25, buttons[0]->getHeight()*2.7));
     buttons.push_back(std::make_unique<Button>("Reset Algorithms", 25, buttons[0]->getHeight()*1.5));
-    buttons.push_back(std::make_unique<Button>("Random", 25, buttons[0]->getHeight()*3.9));
-    buttons.push_back(std::make_unique<Button>("Dijkstra's", 25, buttons[0]->getHeight()*5.1));
-    buttons.push_back(std::make_unique<Button>("Depth First", 25, buttons[0]->getHeight()*6.3));
-    buttons.push_back(std::make_unique<Button>("Breadth First", 25, buttons[0]->getHeight()*7.5));
-    buttons.push_back(std::make_unique<Button>("Go To End", 25, buttons[0]->getHeight()*8.7));
+    buttons.push_back(std::make_unique<Button>("Add Obsticals", 25, buttons[0]->getHeight()*3.9));
+    buttons.push_back(std::make_unique<Button>("Random", 25, buttons[0]->getHeight()*5.1));
+    buttons.push_back(std::make_unique<Button>("Dijkstra's", 25, buttons[0]->getHeight()*6.3));
+    buttons.push_back(std::make_unique<Button>("Depth First", 25, buttons[0]->getHeight()*7.5));
+    buttons.push_back(std::make_unique<Button>("Breadth First", 25, buttons[0]->getHeight()*8.7));
+    buttons.push_back(std::make_unique<Button>("Go To End", 25, buttons[0]->getHeight()*9.9));
     return buttons;
 }
 
@@ -45,6 +46,7 @@ int main()
             g->destFound();
         }
 
+        //If button pressed set algorithm, if algo already running pause it(set algo to NONE)
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             Rectangle mouseRec= Rectangle{(float)GetMouseX(), (float)GetMouseY(), 20, 20};
             Vector2 mousePos = Vector2{(float)GetMouseX(), (float)GetMouseY()};
@@ -56,22 +58,24 @@ int main()
                 g->resetPos();
             }else if (CheckCollisionRecs(mouseRec, buttons[2]->getRec())){
 		    g->resetAlgos();
-	    }else if (CheckCollisionRecs(mouseRec, buttons[3]->getRec())){
-                if (g->getAlgo() != g->Algo::RANDOM){g->setAlgo(g->Algo::RANDOM);}
-		else{g->setAlgo(g->Algo::NONE);}
+            }else if (CheckCollisionRecs(mouseRec, buttons[3]->getRec())){
+                g->addObsticals();
             }else if (CheckCollisionRecs(mouseRec, buttons[4]->getRec())){
-                std::cout << "Dijkstra's Algorithm" << std::endl;
-		if (g->getAlgo() != g->Algo::DIJKSTRA){g->setAlgo(g->Algo::DIJKSTRA);}
-		else{g->setAlgo(g->Algo::NONE);}
+                if (g->getAlgo() != g->Algo::RANDOM){g->setAlgo(g->Algo::RANDOM);}
+                else{g->setAlgo(g->Algo::NONE);}
             }else if (CheckCollisionRecs(mouseRec, buttons[5]->getRec())){
-		if (g->getAlgo() != g->Algo::DF){g->setAlgo(g->Algo::DF);}
-		else{g->setAlgo(g->Algo::NONE);}
+                std::cout << "Dijkstra's Algorithm" << std::endl;
+                if (g->getAlgo() != g->Algo::DIJKSTRA){g->setAlgo(g->Algo::DIJKSTRA);}
+                else{g->setAlgo(g->Algo::NONE);}
             }else if (CheckCollisionRecs(mouseRec, buttons[6]->getRec())){
-		if (g->getAlgo() != g->Algo::BF){g->setAlgo(g->Algo::BF);}
-		else{g->setAlgo(g->Algo::NONE);}
+                if (g->getAlgo() != g->Algo::DF){g->setAlgo(g->Algo::DF);}
+                else{g->setAlgo(g->Algo::NONE);}
             }else if (CheckCollisionRecs(mouseRec, buttons[7]->getRec())){
+                if (g->getAlgo() != g->Algo::BF){g->setAlgo(g->Algo::BF);}
+                else{g->setAlgo(g->Algo::NONE);}
+            }else if (CheckCollisionRecs(mouseRec, buttons[8]->getRec())){ 
                 g->goToDest();
-	    }
+            }
         }
 
         switch (g->getAlgo())
