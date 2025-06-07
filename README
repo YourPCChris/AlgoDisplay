@@ -1,4 +1,10 @@
 
-GUI to show algorithms such as searching algorithms 
+GUI to show algorithms such as:
+- Depth First Search
+- Breadth First Search 
+- Random Search 
+- Dijkstra's(To be added soon)
+
+Press Add Obsticals button to add randomly located orange squares to the grid which it can not go through and add as many as you want.
 
 
