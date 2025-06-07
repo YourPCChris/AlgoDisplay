@@ -49,7 +49,6 @@ void Grid::display()
     }
 } 
 
-const char* Grid::getErrorText() { return errorText;}
 void Grid::highlightSingleSquare(int newX, int newY, Color newColor)
 {
     if (newX >= 0 && newX < col && newY >= 0 && newY < row) {
@@ -135,6 +134,7 @@ void Grid::destFound()
         dest->setColor(RED);
         if (!queue.empty()){ emptyQueue();}
         if (!pathStack.empty()){ emptyStack();}
+        setErrorText("Destination Found");
         runningAlgo = Grid::NONE;
     }
 }
@@ -203,7 +203,7 @@ void Grid::addObsticals()
     {
         int obstX = dist_x(gen);
         int obstY = dist_y(gen);
-        highlightSingleSquare(obstX, obstY, ORANGE);
+        if (!checkVisited(obstX,obstY)) highlightSingleSquare(obstX, obstY, ORANGE);
     }
     //std::cout << "Obstical (X:Y) -> " << obstX << ":" << obstY << std::endl;
 }
@@ -211,6 +211,7 @@ void Grid::addObsticals()
 void Grid::setErrorText(const char* newError) { errorText = newError;}
 void Grid::setAlgo(Grid::Algo newAlgo) { runningAlgo = newAlgo;}
 void Grid::resetPos() { x = 0; y = 0; grid[y][x]->setColor(RED);}
+const char* Grid::getErrorText() { return errorText;}
 int Grid::getX() { return x;}
 int Grid::getY() { return y;}
 int Grid::getRow() { return row;}

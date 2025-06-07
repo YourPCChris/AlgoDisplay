@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <cstring>
 #include "grid.h"
 #include "Button.h"
 #include "random.h"
@@ -44,6 +45,9 @@ int main()
 
         if (g->getX() == g->getCol()-1 && g->getY() == g->getRow()-1) {
             g->destFound();
+        }else if (std::strcmp(g->getErrorText(), "Destination Found") == 0) {
+            std::cout << "Clearing Error Message" << std::endl;
+            g->setErrorText(" ");
         }
 
         //If button pressed set algorithm, if algo already running pause it(set algo to NONE)
