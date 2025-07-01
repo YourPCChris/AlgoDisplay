@@ -24,7 +24,7 @@ void addButton(Window* w, const char* newString)
     w->nextFree++;
 }
 
-void displaywindow(Window* w)
+void displayWindow(Window* w)
 {
     if(!w) printf("Error Allocating Window");
 

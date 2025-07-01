@@ -9,8 +9,9 @@ void main()
 {
     printf("We Ball\n");
 
-    Window w;
+    Window w = {.FPS=60};
     makeWindow(&w,"Dijkstra", 1000, 800);
+    addButton(&w, "Go/Stop");
 
     InitWindow(w.width, w.height, w.title);
     SetTargetFPS(w.FPS);
@@ -19,6 +20,7 @@ void main()
     {
         BeginDrawing();
         ClearBackground(w.color);
+        displayWindow(&w);
         EndDrawing();
     }
 }
