@@ -20,7 +20,20 @@ void main()
     {
         BeginDrawing();
         ClearBackground(w.color);
+        if (IsMouseButtonPressed(0)){
+            Vector2 mousePos = GetMousePosition();
+
+            for (int i=0; i < w.size ; i++)
+            {
+                if (CheckCollisionPointRec(mousePos, w.buttons[i].rec)){
+                    updateButton(&(w.buttons[i]));
+                }
+            }
+        }
+
         displayWindow(&w);
         EndDrawing();
     }
+
+    freeWindow(&w);
 }

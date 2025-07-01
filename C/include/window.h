@@ -24,7 +24,4 @@ typedef struct
 void makeWindow(Window* w, const char* newTitle, int newWidth, int newHeight);
 void addButton(Window* w, const char* newString);
 void displayWindow(Window* w);
-
-
-    
-
+void freeWindow(Window* w);

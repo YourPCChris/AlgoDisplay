@@ -15,6 +15,8 @@ typedef struct
         fontSize;
     Color color;
     Color fontColor;
+    Rectangle rec;
+    bool active;
     
     const char* text;
 } Button;
@@ -22,3 +24,5 @@ typedef struct
 
 Button makeButton(const char* newText, int newX, int newY);
 void drawButton(Button* b);
+void updateButton(Button* b);
+void clickButton(Button* b);

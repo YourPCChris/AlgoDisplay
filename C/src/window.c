@@ -36,3 +36,10 @@ void displayWindow(Window* w)
 
 
 
+void freeWindow(Window* w)
+{
+    if (w->buttons != NULL){
+        free(w->buttons);
+        w->buttons = NULL;
+    }
+}
