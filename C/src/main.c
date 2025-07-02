@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "window.h"
 #include "button.h"
+#include "dijkstra.h"
+#include "nodes.h"
 
 
 
