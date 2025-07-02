@@ -7,7 +7,7 @@
 
 typedef struct
 {
-   Node* nodes;
+   Queue* nodes;
    int posID;
    int delay;
    int nextFree;

@@ -14,5 +14,5 @@ typedef struct
     bool visited;
 } Node;
 
-Node makeNode();
+Node makeNode(int newID);
 void drawNode(Node* n);

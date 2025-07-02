@@ -28,7 +28,7 @@ void displayWindow(Window* w)
 {
     if(!w) printf("Error Allocating Window");
 
-    for (int i=0; i < w->size ; i++)
+    for (int i=0; i < w->nextFree; i++)
     {
         drawButton(&(w->buttons[i]));
     }

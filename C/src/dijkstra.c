@@ -9,7 +9,7 @@ Dijkstra makeDijkstra()
 {
     Dijkstra d;
     d.size = 10;
-    d.nodes = malloc(d.size * sizeof(Node));
+    d.nodes = malloc(sizeof(Queue));
     d.posID = 0;
     d.delay = 1;
     d.nextFree = 0;
@@ -19,8 +19,7 @@ Dijkstra makeDijkstra()
 void freeDijkstra(Dijkstra* d)
 {
     if (d->nodes != NULL){
-        free(d->nodes);
-        d->nodes = NULL;
+        freeQueue(d->nodes);
     }
 }
 
